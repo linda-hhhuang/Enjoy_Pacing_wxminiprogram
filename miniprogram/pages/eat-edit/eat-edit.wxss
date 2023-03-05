@@ -1,0 +1,36 @@
+.container {
+  width: 100%;
+}
+
+.rate_title {
+  width: 200rpx;
+  font-size: small;
+  margin-left: 32rpx;
+}
+
+.rate_star {
+  margin-right: 20rpx;
+}
+
+.rate {
+  background-color: #fff;
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32rpx;
+}
+
+.evaluation {
+  width: 100%
+}
+
+.input {
+  margin: 0 32rpx;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

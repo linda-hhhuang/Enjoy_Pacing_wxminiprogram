@@ -1,0 +1,27 @@
+<!--main.wxml-->
+<view class="container">
+  <view class="eat-list">
+    <block wx:for="{{eatData}}" wx:key="restaurantId" wx:for-item="eat">
+      <t-swipe-cell class="eat-item">
+        <t-cell hover arrow class="cell" bind:tap="onItemClick" data-id="{{eat.restaurantId}}">
+          <view slot="title" class="title">
+            <t-icon name="{{eat.like?'heart-filled':'heart'}}" size="48rpx" class="heart" />
+            <text>{{eat.restaurantName}}</text>
+          </view>
+          <view slot="note" class="note">
+            <view class="note-item"> {{eat.time}} </view>
+            <view class="note-item rate"> {{eat.rate}}
+              <t-icon name="star-filled" size="36rpx" class="star" />
+            </view>
+            <view class="note-item"> {{eat.price}}¥</view>
+          </view>
+        </t-cell>
+        <t-icon slot="right" class="delete-btn" name="delete" size="48rpx" bind:tap="onDelete" />
+      </t-swipe-cell>
+    </block>
+    <view class="list-empty"></view>
+  </view>
+  <view class="add-btn-warpper">
+    <t-button theme="primary" icon="add-circle" shape="circle" size="large" class="add-btn" bind:tap="onAdd"></t-button>
+  </view>
+</view>

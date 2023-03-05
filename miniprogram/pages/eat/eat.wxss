@@ -1,0 +1,86 @@
+.container {
+  height: 100vh;
+  overflow: hidden;
+  padding: 0;
+}
+
+.eat-list {
+  margin-top: 10vh;
+  height: 76vh;
+  overflow: auto;
+  width: 100%;
+}
+
+.list-empty {
+  height: 10vh;
+  width: 100%;
+}
+
+.eat-item {
+  display: block;
+  width: 100%;
+}
+
+.cell {
+  height: 100%;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.heart {
+  color: red;
+  margin-right: 10rpx;
+}
+
+.note {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.rate {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.star {
+  color: #f8d152;
+}
+
+.delete-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 60rpx;
+  height: 100%;
+  color: red;
+  margin-right: 30rpx;
+}
+
+.heart-btn {
+  padding: 0rpx;
+  margin: 0rpx 10rpx;
+}
+
+.add-btn-warpper {
+  width: 100%;
+  height: 26vh;
+  margin-top: -12vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(rgba(255, 255, 255, 0) 0%, white 50%);
+  z-index: 2;
+}
+
+.add-btn {
+  width: 60rpx;
+}

@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "食录~",
+  "usingComponents": {
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-rate": "tdesign-miniprogram/rate/rate",
+    "t-textarea": "tdesign-miniprogram/textarea/textarea",
+    "t-button": "tdesign-miniprogram/button/button"
+  },
+  "component": true
+}

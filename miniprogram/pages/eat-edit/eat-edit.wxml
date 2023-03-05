@@ -1,0 +1,23 @@
+<!--logs.wxml-->
+<view class="container">
+  <view class="input" style="{{style}}">
+    <t-input label="店名" placeholder="店名(不要太长噢)" align="center" value="{{form.restaurantName}}" bindchange="onRestaurantNameChange" />
+  </view>
+  <view class="input" style="{{style}}">
+    <t-input label="位置" placeholder="位置" align="center" value="{{form.coordinate}}" bindchange="onCoordinateChange" />
+  </view>
+  <view class="input flex" style="{{style}}">
+    <t-input label="总价格(¥)" placeholder="0.00" align="center" value="{{form.price}}" bindchange="onPriceChagnge" />
+    <t-button theme="primary" size="extra-small" bindchange="onPriceChagnge"> 自动 </t-button>
+  </view>
+  <view class="input rate " style="{{style}}">
+    <view class="rate_title">总分</view>
+    <t-rate class="rate_star" value="{{form.rate}}" allowHalf bind:change="onRateChange" />
+  </view>
+  <view class="input flex" style="{{style}}">
+    <view class="rate_title">总评</view>
+    <t-textarea placeholder="写写！" disableDefaultPadding="{{true}}" autosize alue="{{form.evaluation}}" bind:change="onEvaluationChange" class="evaluation" />
+  </view>
+
+
+</view>
