@@ -1,19 +1,21 @@
 // logs.ts
 // const util = require('../../utils/util.js')
-import { formatTime } from '../../utils/util'
+import {
+  formatTime
+} from '../../utils/util'
 
 Page({
   data: {
-    logs: [],
+    eats: (wx.getStorageSync('eats') || []).map((eat) => {
+      console.log("logs", eat)
+      return {
+        date: eat.restaurantId
+      }
+    }),
   },
-  onLoad() {
-    this.setData({
-      logs: (wx.getStorageSync('eat') || []).map((log) => {
-        return {
-          date: formatTime(new Date(log)),
-          timeStamp: log
-        }
-      }),
-    })
-  },
+  // onShow() {
+  //   this.setData({
+  //     eats: 
+  //   })
+  // },
 })

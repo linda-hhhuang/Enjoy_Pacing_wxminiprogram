@@ -1,10 +1,70 @@
-.container {
-  width: 100%;
+.main-form-item {
+  width: 90%;
+  padding: 0 20rpx;
+  min-height: 10vh;
+  display: flex;
+  align-items: center;
 }
 
-.rate_title {
-  width: 200rpx;
+.dish-form-item-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dish-form-item {
+  width: 94%;
+  min-height: 10vh;
+  display: flex;
+  align-items: center;
+}
+
+.eat-edit-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.form {
+  height: 84vh;
+  overflow: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-wrapper {
+  border: 1rpx solid rgb(109, 131, 255);
+  border-radius: 24rpx;
+}
+
+.title {
   font-size: small;
+}
+
+.like_title {
+  width: 200rpx;
+  margin-left: 32rpx;
+}
+
+.like-box {
+  width: auto;
+  padding: 32rpx;
+  display: flex;
+  justify-content: space-around;
+  background-color: #fff;
+  width: 80%;
+  margin-left: 80rpx;
+}
+
+.main_title {
+  width: 200rpx;
   margin-left: 32rpx;
 }
 
@@ -13,24 +73,95 @@
 }
 
 .rate {
-  background-color: #fff;
-  height: 96rpx;
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0 32rpx;
 }
 
 .evaluation {
-  width: 100%
+  width: 100%;
+  margin-left: 140rpx;
 }
 
-.input {
-  margin: 0 32rpx;
-}
 
 .flex {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.dish-wrapper {
+  width: 90%;
+  padding: 4rpx 12rpx 24rpx 12rpx;
+  margin-top: 20rpx;
+  border: 1rpx solid rgb(109, 131, 255);
+  border-radius: 24rpx;
+}
+
+.dish-item {
+  display: block;
+  width: 100%;
+}
+
+.cell {
+  height: 100%;
+}
+
+.dish-item-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.heart {
+  color: red;
+  margin-right: 10rpx;
+}
+
+.note {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.star {
+  color: #f8d152;
+}
+
+.delete-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 60rpx;
+  height: 100%;
+  color: red;
+  margin-right: 30rpx;
+}
+
+.dish-rate {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-btn-warpper {
+  width: 80%;
+  height: 16vh;
+  background-image: linear-gradient(rgba(255, 255, 255, 0) 0%, white 50%);
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.footer-btn {
+  width: 180rpx;
+  margin-top: 4vh;
+}
+
+
+.t-cell {
+  margin-top: 16rpx;
+  border: 2rpx solid rgb(109, 131, 255);
+  border-radius: 10rpx;
 }

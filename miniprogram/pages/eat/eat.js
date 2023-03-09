@@ -7,6 +7,18 @@ Page({
     eatData: [],
   },
   onLoad() {
+    console.log("eat onload")
+    this.setData({
+      eatData: (wx.getStorageSync('eats') || []).map((item) => {
+        return {
+          ...item,
+          time: item.time ? formatTime(new Date(parseInt(item.time))) : '未填写时间',
+        }
+      })
+    })
+  },
+  onShow() {
+    console.log("eat onload")
     this.setData({
       eatData: (wx.getStorageSync('eats') || []).map((item) => {
         return {

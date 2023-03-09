@@ -1,23 +1,94 @@
 <!--logs.wxml-->
-<view class="container">
-  <view class="input" style="{{style}}">
-    <t-input label="店名" placeholder="店名(不要太长噢)" align="center" value="{{form.restaurantName}}" bindchange="onRestaurantNameChange" />
+<view class="eat-edit-container">
+  <view class="form">
+    <view class="main-wrapper">
+      <view class="main-form-item">
+        <t-input placeholder="店名(不要太长噢)" align="right" value="{{form.restaurantName}}" bindchange="onRestaurantNameChange">
+          <view class="title" slot="label">店名</view>
+        </t-input>
+      </view>
+      <view class="main-form-item flex ">
+        <view class="title main_title">收藏</view>
+        <t-radio-group value="{{form.like}}" borderless class="like-box" bindchange="onLikeChange">
+          <t-radio block="{{false}}" label="是" value="{{true}}" />
+          <t-radio block="{{false}}" label="否" value="{{false}}" />
+        </t-radio-group>
+      </view>
+      <view class="main-form-item">
+        <t-input placeholder="位置" align="right" value="{{form.coordinate}}" bindchange="onCoordinateChange">
+          <view class="title" slot="label">位置</view>
+        </t-input>
+      </view>
+      <view class="flex" class="main-form-item">
+        <t-input placeholder="0.00" align="right" value="{{form.price}}" bindchange="onPriceChagnge">
+          <view class="title" slot="label">总价格(¥)</view>
+        </t-input>
+        <t-button theme="primary" size="extra-small" bind:tap="onPriceCount"> 自动 </t-button>
+      </view>
+      <view class="main-form-item rate">
+        <view class="title main_title">总分</view>
+        <t-rate class="rate_star" value="{{form.rate}}" allowHalf bind:change="onRateChange" />
+      </view>
+      <view class="flex" class="main-form-item">
+        <view class="title main_title">总评</view>
+        <t-textarea placeholder="写写！" disableDefaultPadding="{{true}}" autosize alue="{{form.evaluation}}" bind:change="onEvaluationChange" class="evaluation" />
+      </view>
+    </view>
+    <view class="dish-wrapper">
+      <block wx:for="{{form.dishes}}" wx:key="id" wx:for-item="dish">
+        <block wx:if="{{dish.delete}}"></block>
+        <block wx:else>
+          <t-swipe-cell class="dish-item">
+            <t-cell class="cell">
+              <view slot="title" class="dish-item-title">
+                <t-icon name="{{dish.like?'heart-filled':'heart'}}" size="48rpx" class="heart" />
+                <text>{{dish.name}}</text>
+              </view>
+              <view slot="note" class="note">
+                <view class="dish-rate"> {{dish.rate}}
+                  <t-icon name="star-filled" size="36rpx" class="star" />
+                </view>
+                <view class="header-right-item"> {{dish.price}}¥</view>
+              </view>
+            </t-cell>
+            <t-icon slot="right" class="delete-btn" name="delete" size="48rpx" bind:tap="onDelete" data-id="{{dish.id}}" />
+          </t-swipe-cell>
+          <!-- 内容 -->
+          <view class="dish-form-item-wrapper">
+            <view class="dish-form-item">
+              <t-input placeholder="菜名(不要太长噢)" align="right" value="{{dish.name}}" bindchange="onDishNameChange" data-id="{{dish.id}}">
+                <view class="title" slot="label">菜名</view>
+              </t-input>
+            </view>
+            <view class="flex" class="dish-form-item">
+              <view class="title main_title">收藏</view>
+              <t-radio-group value="{{dish.like}}" borderless class="like-box" bindchange="onDishLikeChange" data-id="{{dish.id}}">
+                <t-radio block="{{false}}" label="是" value="{{true}}" />
+                <t-radio block="{{false}}" label="否" value="{{false}}" />
+              </t-radio-group>
+            </view>
+            <view class="flex" class="dish-form-item">
+              <t-input placeholder="0.00" align="right" value="{{dish.price}}" bindchange="onDishPriceChagnge" data-id="{{dish.id}}">
+                <view class="title" slot="label">价格(¥)</view>
+              </t-input>
+            </view>
+            <view class="rate" class="dish-form-item">
+              <view class="title main_title">分数</view>
+              <t-rate class="rate_star" value="{{dish.rate}}" allowHalf bind:change="onDishRateChange" data-id="{{dish.id}}" />
+            </view>
+            <view class="flex" class="dish-form-item">
+              <view class="title main_title">评分</view>
+              <t-textarea placeholder="写写！" disableDefaultPadding="{{true}}" autosize alue="{{dish.evaluation}}" bind:change="onDishEvaluationChange" class="evaluation" data-id="{{dish.id}}" />
+            </view>
+          </view>
+        </block>
+      </block>
+    </view>
   </view>
-  <view class="input" style="{{style}}">
-    <t-input label="位置" placeholder="位置" align="center" value="{{form.coordinate}}" bindchange="onCoordinateChange" />
+  <view class="footer-btn-warpper">
+    <t-button theme="light" size="large" class="footer-btn" bind:tap="onAddDish">加菜</t-button>
+    <t-button theme="light" size="large" class="footer-btn" bind:tap="onConfirm">完成</t-button>
+    <t-button theme="light" size="large" class="footer-btn" bind:tap="onCancel">取消</t-button>
   </view>
-  <view class="input flex" style="{{style}}">
-    <t-input label="总价格(¥)" placeholder="0.00" align="center" value="{{form.price}}" bindchange="onPriceChagnge" />
-    <t-button theme="primary" size="extra-small" bindchange="onPriceChagnge"> 自动 </t-button>
-  </view>
-  <view class="input rate " style="{{style}}">
-    <view class="rate_title">总分</view>
-    <t-rate class="rate_star" value="{{form.rate}}" allowHalf bind:change="onRateChange" />
-  </view>
-  <view class="input flex" style="{{style}}">
-    <view class="rate_title">总评</view>
-    <t-textarea placeholder="写写！" disableDefaultPadding="{{true}}" autosize alue="{{form.evaluation}}" bind:change="onEvaluationChange" class="evaluation" />
-  </view>
-
 
 </view>

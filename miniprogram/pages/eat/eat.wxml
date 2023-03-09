@@ -1,5 +1,5 @@
 <!--main.wxml-->
-<view class="container">
+<view class="eat-container">
   <view class="eat-list">
     <block wx:for="{{eatData}}" wx:key="restaurantId" wx:for-item="eat">
       <t-swipe-cell class="eat-item">
@@ -9,11 +9,11 @@
             <text>{{eat.restaurantName}}</text>
           </view>
           <view slot="note" class="note">
-            <view class="note-item"> {{eat.time}} </view>
-            <view class="note-item rate"> {{eat.rate}}
+            <view> {{eat.time}} </view>
+            <view class="rate"> {{eat.rate}}
               <t-icon name="star-filled" size="36rpx" class="star" />
             </view>
-            <view class="note-item"> {{eat.price}}¥</view>
+            <view> {{eat.price}}¥</view>
           </view>
         </t-cell>
         <t-icon slot="right" class="delete-btn" name="delete" size="48rpx" bind:tap="onDelete" />

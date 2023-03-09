@@ -1,7 +1,6 @@
-.container {
+.eat-container {
   height: 100vh;
   overflow: hidden;
-  padding: 0;
 }
 
 .eat-list {
