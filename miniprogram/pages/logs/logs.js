@@ -7,9 +7,9 @@ import {
 Page({
   data: {
     eats: (wx.getStorageSync('eats') || []).map((eat) => {
-      console.log("logs", eat)
+      console.log("eat", eat)
       return {
-        date: eat.restaurantId
+        date: eat.id
       }
     }),
   },

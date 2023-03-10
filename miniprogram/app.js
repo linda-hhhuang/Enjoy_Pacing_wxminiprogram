@@ -1,7 +1,6 @@
 const initForm = {
   /** 饭店ID */
   delete: false,
-  restaurantId: '',
   /** 店名 */
   restaurantName: '',
   /** 收藏 */

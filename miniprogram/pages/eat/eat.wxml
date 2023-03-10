@@ -1,23 +1,26 @@
 <!--main.wxml-->
 <view class="eat-container">
   <view class="eat-list">
-    <block wx:for="{{eatData}}" wx:key="restaurantId" wx:for-item="eat">
-      <t-swipe-cell class="eat-item">
-        <t-cell hover arrow class="cell" bind:tap="onItemClick" data-id="{{eat.restaurantId}}">
-          <view slot="title" class="title">
-            <t-icon name="{{eat.like?'heart-filled':'heart'}}" size="48rpx" class="heart" />
-            <text>{{eat.restaurantName}}</text>
-          </view>
-          <view slot="note" class="note">
-            <view> {{eat.time}} </view>
-            <view class="rate"> {{eat.rate}}
-              <t-icon name="star-filled" size="36rpx" class="star" />
+    <block wx:for="{{eatData}}" wx:key="id" wx:for-item="eat">
+      <block wx:if="{{eat.delete}}"></block>
+      <block wx:else>
+        <t-swipe-cell class="eat-item">
+          <t-cell hover arrow class="cell" bind:tap="onItemClick" data-id="{{eat.id}}">
+            <view slot="title" class="title">
+              <t-icon name="{{eat.like?'heart-filled':'heart'}}" size="48rpx" class="heart" />
+              <text>{{eat.restaurantName}}</text>
             </view>
-            <view> {{eat.price}}¥</view>
-          </view>
-        </t-cell>
-        <t-icon slot="right" class="delete-btn" name="delete" size="48rpx" bind:tap="onDelete" />
-      </t-swipe-cell>
+            <view slot="note" class="note">
+              <view> {{eat.time}} </view>
+              <view class="rate"> {{eat.rate}}
+                <t-icon name="star-filled" size="36rpx" class="star" />
+              </view>
+              <view> {{eat.price}}¥</view>
+            </view>
+          </t-cell>
+          <t-icon slot="right" class="delete-btn" name="delete" size="48rpx" bind:tap="onDelete" data-id="{{eat.id}}" />
+        </t-swipe-cell>
+      </block>
     </block>
     <view class="list-empty"></view>
   </view>

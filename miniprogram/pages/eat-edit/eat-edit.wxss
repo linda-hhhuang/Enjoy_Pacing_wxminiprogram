@@ -88,6 +88,27 @@
   align-items: center;
 }
 
+.border {
+  position: relative;
+}
+
+.border::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: unset;
+  bottom: 0;
+  left: unset;
+  right: unset;
+  background-color: var(--td-input-border-color, var(--td-component-stroke, var(--td-gray-color-3, #e7e7e7)));
+  height: 1px;
+  left: 0;
+  right: 0;
+  transform: scaleY(0.5);
+  left: 32rpx;
+  right: 0;
+}
+
 .dish-wrapper {
   width: 90%;
   padding: 4rpx 12rpx 24rpx 12rpx;
@@ -160,8 +181,13 @@
 }
 
 
-.t-cell {
+.dish-item .t-cell {
   margin-top: 16rpx;
   border: 2rpx solid rgb(109, 131, 255);
   border-radius: 10rpx;
+}
+
+.t-input--border:after {
+  left: 32rpx !important;
+  right: 0;
 }

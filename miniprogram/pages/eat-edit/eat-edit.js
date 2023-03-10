@@ -1,3 +1,7 @@
+import {
+  formatTime
+} from '../../utils/util'
+
 const initDish = {
   delete: false,
   /** 菜名 */
@@ -9,13 +13,12 @@ const initDish = {
   /** 菜评价 */
   evaluation: '',
   /** 菜单项价格 */
-  price: ''
+  price: '',
+  id: "0"
 }
 
 const initForm = {
   delete: false,
-  /** 饭店ID */
-  restaurantId: '',
   /** 店名 */
   restaurantName: '',
   /** 收藏 */
@@ -31,31 +34,40 @@ const initForm = {
   /** 评价 */
   evaluation: '',
   /** 菜 */
-  dishes: [initDish]
+  dishes: [initDish],
+  id: "0"
 }
 Page({
   data: {
     form: initForm,
     type: "", // add edit
-    id: 0,
+    datetimeVisible: false,
+    datetime: formatTime(new Date(), true),
   },
   onLoad: function (option) {
     if (option.type) {
+      console.log("option.type", option.type)
       this.setData({
         type: option.type
       })
     }
-    if (option.id) {
+    if (typeof option.id === 'string') {
+      console.log("option.id", option.id)
       wx.setNavigationBarTitle({
-        title: '这是第 ' + option.id + ' 个食录～',
+        title: `这是第 ${parseInt(option.id) + 1}  个食录～`,
       })
       this.setData({
-        id: option.id
+        form: {
+          ...this.data.form,
+          id: option.id
+        }
       })
     }
-    if (option.type == 'edit' && option.id) {
+    if (option.type == 'edit' && typeof option.id === 'string') {
+      const currForm = wx.getStorageSync('eats').find(i => i.id == option.id)
       this.setData({
-        form: wx.getStorageSync('eats').find(i => i.restaurantId === option.id)
+        form: currForm,
+        datetime: formatTime(new Date(currForm.time), true),
       })
     }
   },
@@ -125,7 +137,7 @@ Page({
   onDishNameChange: function (e) {
     console.log("onDishNameChange", e)
     let newDishes = this.data.form.dishes;
-    newDishes[e.currentTarget.dataset.id].name = e.detail.value
+    newDishes[parseInt(e.currentTarget.dataset.id)].name = e.detail.value
     this.setData({
       form: {
         ...this.data.form,
@@ -136,7 +148,7 @@ Page({
   onDishLikeChange: function (e) {
     console.log("onDishLikeChange", e)
     let newDishes = this.data.form.dishes;
-    newDishes[e.currentTarget.dataset.id].like = e.detail.value
+    newDishes[parseInt(e.currentTarget.dataset.id)].like = e.detail.value
     this.setData({
       form: {
         ...this.data.form,
@@ -147,7 +159,7 @@ Page({
   onDishPriceChagnge: function (e) {
     console.log("onDishPriceChagnge", e)
     let newDishes = this.data.form.dishes;
-    newDishes[e.currentTarget.dataset.id].price = e.detail.value
+    newDishes[parseInt(e.currentTarget.dataset.id)].price = e.detail.value
     this.setData({
       form: {
         ...this.data.form,
@@ -158,7 +170,7 @@ Page({
   onDishRateChange: function (e) {
     console.log("onDishRateChange", e)
     let newDishes = this.data.form.dishes;
-    newDishes[e.currentTarget.dataset.id].rate = e.detail.value
+    newDishes[parseInt(e.currentTarget.dataset.id)].rate = e.detail.value
     this.setData({
       form: {
         ...this.data.form,
@@ -169,7 +181,7 @@ Page({
   onDishEvaluationChange: function (e) {
     console.log("onDishEvaluationChange", e)
     let newDishes = this.data.form.dishes;
-    newDishes[e.currentTarget.dataset.id].evaluation = e.detail.value
+    newDishes[parseInt(e.currentTarget.dataset.id)].evaluation = e.detail.value
     this.setData({
       form: {
         ...this.data.form,
@@ -181,7 +193,7 @@ Page({
     console.log("onAddDish", e)
     let newDishes = this.data.form.dishes;
     let newDish = initDish
-    newDish.id = newDish.length
+    newDish.id = String(newDishes.length)
     newDishes.push(newDish)
     this.setData({
       form: {
@@ -194,21 +206,21 @@ Page({
     wx.navigateBack()
   },
   onConfirm: function (e) {
-    console.log("onConfirm", e)
+    console.log("onConfirm", this.data.form)
     const eat = wx.getStorageSync("eats") || []
     if (this.data.type === 'edit') {
-      eat[this.data.id] = this.data.form
+      eat[parseInt(this.data.form.id)] = this.data.form
     } else if (this.data.type === 'add') {
       eat.unshift(this.data.form)
     }
-    console.log("onConfirm setStorageSync", wx.setStorageSync('eats', eat))
+    wx.setStorageSync('eats', eat)
     wx.navigateBack()
 
   },
   onDelete: function (e) {
     console.log("onDelete", e)
     let newDishes = this.data.form.dishes;
-    newDishes[e.currentTarget.dataset.id].delete = true
+    newDishes[parseInt(e.currentTarget.dataset.id)].delete = true
     this.setData({
       form: {
         ...this.data.form,
@@ -216,4 +228,31 @@ Page({
       }
     })
   },
+  showPicker(e) {
+    this.setData({
+      datetimeVisible: true,
+    });
+  },
+  hidePicker() {
+    this.setData({
+      datetimeVisible: false,
+    });
+  },
+  onTimeConfirm(e) {
+    const {
+      value
+    } = e?.detail;
+    console.log('confim', value);
+
+    this.setData({
+      datetime: value,
+      form: {
+        ...this.data.form,
+        time: new Date(value).getTime()
+      }
+    });
+    this.hidePicker();
+  },
+
+
 })

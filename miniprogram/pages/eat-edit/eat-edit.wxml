@@ -7,7 +7,13 @@
           <view class="title" slot="label">店名</view>
         </t-input>
       </view>
-      <view class="main-form-item flex ">
+      <view class="main-form-item">
+        <t-cell hover note="{{datetime}}" arrow bindtap="showPicker" t-class="pannel-item">
+          <view class="title" slot="title">时间</view>
+        </t-cell>
+      </view>
+      <t-date-time-picker title="时间" visible="{{datetimeVisible}}" mode="minute" value="{{datetime}}" format="YYYY-MM-DD HH:mm" bindchange="onTimeConfirm" bindcancel="hidePicker" />
+      <view class="main-form-item flex border">
         <view class="title main_title">收藏</view>
         <t-radio-group value="{{form.like}}" borderless class="like-box" bindchange="onLikeChange">
           <t-radio block="{{false}}" label="是" value="{{true}}" />
