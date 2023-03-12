@@ -1,5 +1,32 @@
 <!--main.wxml-->
 <view class="eat-container">
+  <view class="search-wrapper">
+    <t-radio-group t-class="horizontal-box" value="{{searchType}}" bind:change="onSearchTypeChange">
+      <view class="card {{searchType == 0 ? 'card--active' : ''}}">
+        <t-radio value="{{0}}" label="内容搜索" icon="none" borderless />
+      </view>
+      <view class="card {{searchType == 1 ? 'card--active' : ''}}">
+        <t-radio value="{{1}}" label="时间搜索" icon="none" borderless />
+      </view>
+    </t-radio-group>
+    <view class="search-form">
+      <block wx:if="{{searchType == 0}}">
+        <view class="search-input">
+          <t-input placeholder="输入任意关键词" align="right" value="{{serachInput}}" bindchange="onSearchInputChange">
+            <view class="title" slot="label">关键词搜索</view>
+          </t-input>
+        </view>
+      </block>
+      <block wx:if="{{searchType == 1}}">
+        <view class="search-input">
+          <t-cell hover arrow bindtap="showPicker" t-class="pannel-item" align="middle">
+            <view class="title" slot="title">选择时间范围</view>
+          </t-cell>
+          <t-calendar visible="{{datetimeVisible}}" bind:confirm="onTimeConfirm" type="range" min-date="{{1640995200000}}" max-date="{{currentTime + 86400000}}" value="{{currentTime}}" />
+        </view>
+      </block>
+    </view>
+  </view>
   <view class="eat-list">
     <block wx:for="{{eatData}}" wx:key="id" wx:for-item="eat">
       <block wx:if="{{eat.delete}}"></block>
@@ -15,16 +42,36 @@
               <view class="rate"> {{eat.rate}}
                 <t-icon name="star-filled" size="36rpx" class="star" />
               </view>
-              <view> {{eat.price}}¥</view>
+              <!-- <view> {{eat.price}}¥</view> -->
             </view>
           </t-cell>
-          <t-icon slot="right" class="delete-btn" name="delete" size="48rpx" bind:tap="onDelete" data-id="{{eat.id}}" />
+          <view slot="right" class="swipe-cell-btn-wrapper">
+            <t-icon class="swipe-cell-btn edit-btn" name="edit" size="48rpx" bind:tap="onEdit" data-id="{{eat.id}}" />
+            <t-icon class="swipe-cell-btn delete-btn" name="delete" size="48rpx" bind:tap="onDelete" data-id="{{eat.id}}" />
+          </view>
+
         </t-swipe-cell>
       </block>
     </block>
     <view class="list-empty"></view>
   </view>
-  <view class="add-btn-warpper">
-    <t-button theme="primary" icon="add-circle" shape="circle" size="large" class="add-btn" bind:tap="onAdd"></t-button>
+  <view class="btn-warpper">
+    <t-button theme="light" shape="round" size="medium" class="import-btn" bind:tap="onImport"> 导入</t-button>
+    <t-button theme="primary" icon="add-circle" shape="round" size="large" class="add-btn" bind:tap="onAdd"> 新增</t-button>
+    <t-button theme="light" shape="round" size="medium" class="export-btn" bind:tap="onExport"> 导出</t-button>
   </view>
 </view>
+<t-message id="t-message" />
+
+<t-popup visible="{{importVisible}}" bind:visible-change="onImportVisibleChange" placement="bottom">
+  <view class="import-block">
+    <view class="import-header">
+      <t-button bind:tap="onImportCancel" size="large" variant="text">删除所有数据</t-button>
+      <view class="import-title">导入（仅新增）</view>
+      <t-button bind:tap="onImportConfirm" theme="primary" size="large" variant="text">确定</t-button>
+    </view>
+    <view class="import-body">
+      <t-textarea placeholder="输入/粘贴 数据" disableDefaultPadding="{{true}}" autosize value="{{importData}}" bind:change="onImportDataChange" class="import-textarea" />
+    </view>
+  </view>
+</t-popup>

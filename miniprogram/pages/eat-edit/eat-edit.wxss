@@ -4,6 +4,7 @@
   min-height: 10vh;
   display: flex;
   align-items: center;
+
 }
 
 .dish-form-item-wrapper {
@@ -22,16 +23,18 @@
 }
 
 .eat-edit-container {
-  width: 100%;
+  /* width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  box-sizing: border-box;
+  box-sizing: border-box; */
+  height: 100vh;
+  overflow: hidden;
 }
 
 .form {
-  height: 84vh;
+  height: 100vh;
   overflow: auto;
   width: 100%;
   display: flex;
@@ -42,10 +45,11 @@
 .main-wrapper {
   border: 1rpx solid rgb(109, 131, 255);
   border-radius: 24rpx;
+  width: 90%
 }
 
 .title {
-  font-size: small;
+  font-size: medium;
 }
 
 .like_title {
@@ -54,31 +58,14 @@
 }
 
 .like-box {
-  width: auto;
-  padding: 32rpx;
   display: flex;
-  justify-content: space-around;
-  background-color: #fff;
-  width: 80%;
-  margin-left: 80rpx;
-}
-
-.main_title {
-  width: 200rpx;
-  margin-left: 32rpx;
-}
-
-.rate_star {
-  margin-right: 20rpx;
-}
-
-.rate {
   justify-content: space-between;
+  background-color: #fff;
+  width: 50%;
 }
 
 .evaluation {
-  width: 100%;
-  margin-left: 140rpx;
+  width: 60%;
 }
 
 
@@ -90,6 +77,14 @@
 
 .border {
   position: relative;
+}
+
+.main-form-item-content {
+  display: flex;
+  flex: 1;
+  padding: var(--td-input-vertical-padding, 32rpx);
+  justify-content: space-between;
+  align-items: center;
 }
 
 .border::after {
@@ -115,6 +110,21 @@
   margin-top: 20rpx;
   border: 1rpx solid rgb(109, 131, 255);
   border-radius: 24rpx;
+  box-sizing: border-box;
+}
+
+.empty-wrapper {
+  height: 16vh;
+  width: 100%;
+  margin-top: 16vh;
+}
+
+.dish-form-item-content {
+  display: flex;
+  flex: 1;
+  padding: var(--td-input-vertical-padding, 32rpx);
+  justify-content: space-between;
+  align-items: center;
 }
 
 .dish-item {
@@ -167,19 +177,25 @@
 }
 
 .footer-btn-warpper {
-  width: 80%;
+  width: 94%;
   height: 16vh;
   background-image: linear-gradient(rgba(255, 255, 255, 0) 0%, white 50%);
   z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+  top: -16vh;
+  /* grid-template-columns: repeat(3, 1fr); */
 }
 
 .footer-btn {
   width: 180rpx;
-  margin-top: 4vh;
 }
 
+.check-footer-btn {
+  width: 80%;
+}
 
 .dish-item .t-cell {
   margin-top: 16rpx;
@@ -190,4 +206,8 @@
 .t-input--border:after {
   left: 32rpx !important;
   right: 0;
+}
+
+.t-textarea {
+  padding: 0 !important;
 }

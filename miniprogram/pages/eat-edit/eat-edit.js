@@ -2,45 +2,15 @@ import {
   formatTime
 } from '../../utils/util'
 
-const initDish = {
-  delete: false,
-  /** 菜名 */
-  name: '',
-  /** 菜评分 */
-  rate: '0',
-  /** 收藏 */
-  like: false,
-  /** 菜评价 */
-  evaluation: '',
-  /** 菜单项价格 */
-  price: '',
-  id: "0"
-}
+import {
+  initEat,
+  initDish
+} from '../index/index'
 
-const initForm = {
-  delete: false,
-  /** 店名 */
-  restaurantName: '',
-  /** 收藏 */
-  like: false,
-  /** 评分 */
-  rate: 1,
-  /** 吃饭时间 */
-  time: Date.now(),
-  /** 总价格 */
-  price: '',
-  /** 店位置 */
-  coordinate: '',
-  /** 评价 */
-  evaluation: '',
-  /** 菜 */
-  dishes: [initDish],
-  id: "0"
-}
 Page({
   data: {
-    form: initForm,
-    type: "", // add edit
+    form: initEat,
+    type: "", // add edit check
     datetimeVisible: false,
     datetime: formatTime(new Date(), true),
   },
@@ -63,7 +33,7 @@ Page({
         }
       })
     }
-    if (option.type == 'edit' && typeof option.id === 'string') {
+    if ((option.type == 'edit' || option.type == 'check') && typeof option.id === 'string') {
       const currForm = wx.getStorageSync('eats').find(i => i.id == option.id)
       this.setData({
         form: currForm,
@@ -229,6 +199,7 @@ Page({
     })
   },
   showPicker(e) {
+    if (this.data.type === 'check') return
     this.setData({
       datetimeVisible: true,
     });
@@ -241,7 +212,7 @@ Page({
   onTimeConfirm(e) {
     const {
       value
-    } = e?.detail;
+    } = e.detail;
     console.log('confim', value);
 
     this.setData({
@@ -253,6 +224,4 @@ Page({
     });
     this.hidePicker();
   },
-
-
 })
