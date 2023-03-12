@@ -9,16 +9,18 @@ import {
 
 Page({
   data: {
-    form: initEat,
+    form: initEat(),
     type: "", // add edit check
     datetimeVisible: false,
     datetime: formatTime(new Date(), true),
+    disable: false,
   },
   onLoad: function (option) {
     if (option.type) {
       console.log("option.type", option.type)
       this.setData({
-        type: option.type
+        type: option.type,
+        disable: option.type === 'check'
       })
     }
     if (typeof option.id === 'string') {
@@ -107,7 +109,8 @@ Page({
   onDishNameChange: function (e) {
     console.log("onDishNameChange", e)
     let newDishes = this.data.form.dishes;
-    newDishes[parseInt(e.currentTarget.dataset.id)].name = e.detail.value
+    const idx = newDishes.findIndex(item => item.id == e.currentTarget.dataset.id)
+    newDishes[idx].name = e.detail.value
     this.setData({
       form: {
         ...this.data.form,
@@ -118,7 +121,8 @@ Page({
   onDishLikeChange: function (e) {
     console.log("onDishLikeChange", e)
     let newDishes = this.data.form.dishes;
-    newDishes[parseInt(e.currentTarget.dataset.id)].like = e.detail.value
+    const idx = newDishes.findIndex(item => item.id == e.currentTarget.dataset.id)
+    newDishes[idx].like = e.detail.value
     this.setData({
       form: {
         ...this.data.form,
@@ -129,7 +133,8 @@ Page({
   onDishPriceChagnge: function (e) {
     console.log("onDishPriceChagnge", e)
     let newDishes = this.data.form.dishes;
-    newDishes[parseInt(e.currentTarget.dataset.id)].price = e.detail.value
+    const idx = newDishes.findIndex(item => item.id == e.currentTarget.dataset.id)
+    newDishes[idx].price = e.detail.value
     this.setData({
       form: {
         ...this.data.form,
@@ -140,7 +145,8 @@ Page({
   onDishRateChange: function (e) {
     console.log("onDishRateChange", e)
     let newDishes = this.data.form.dishes;
-    newDishes[parseInt(e.currentTarget.dataset.id)].rate = e.detail.value
+    const idx = newDishes.findIndex(item => item.id == e.currentTarget.dataset.id)
+    newDishes[idx].rate = e.detail.value
     this.setData({
       form: {
         ...this.data.form,
@@ -151,7 +157,8 @@ Page({
   onDishEvaluationChange: function (e) {
     console.log("onDishEvaluationChange", e)
     let newDishes = this.data.form.dishes;
-    newDishes[parseInt(e.currentTarget.dataset.id)].evaluation = e.detail.value
+    const idx = newDishes.findIndex(item => item.id == e.currentTarget.dataset.id)
+    newDishes[idx].evaluation = e.detail.value
     this.setData({
       form: {
         ...this.data.form,
@@ -162,7 +169,7 @@ Page({
   onAddDish: function (e) {
     console.log("onAddDish", e)
     let newDishes = this.data.form.dishes;
-    let newDish = initDish
+    let newDish = initDish()
     newDish.id = String(newDishes.length)
     newDishes.push(newDish)
     this.setData({
@@ -179,18 +186,19 @@ Page({
     console.log("onConfirm", this.data.form)
     const eat = wx.getStorageSync("eats") || []
     if (this.data.type === 'edit') {
-      eat[parseInt(this.data.form.id)] = this.data.form
+      const idx = eat.findIndex(item => item.id == this.data.form.id)
+      eat[idx] = this.data.form
     } else if (this.data.type === 'add') {
       eat.unshift(this.data.form)
     }
     wx.setStorageSync('eats', eat)
     wx.navigateBack()
-
   },
   onDelete: function (e) {
     console.log("onDelete", e)
     let newDishes = this.data.form.dishes;
-    newDishes[parseInt(e.currentTarget.dataset.id)].delete = true
+    const idx = newDishes.findIndex(item => item.id == e.currentTarget.dataset.id)
+    newDishes[idx].delete = true
     this.setData({
       form: {
         ...this.data.form,

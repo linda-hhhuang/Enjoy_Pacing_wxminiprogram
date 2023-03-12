@@ -1,7 +1,7 @@
 // index.ts
 // 获取应用实例
 
-export const initDish = {
+export const initDish = () => ({
   delete: false,
   /** 菜名 */
   name: '',
@@ -14,9 +14,9 @@ export const initDish = {
   /** 菜单项价格 */
   price: '',
   id: "0"
-}
+})
 
-export const initEat = {
+export const initEat = () => ({
   delete: false,
   /** 店名 */
   restaurantName: '',
@@ -33,9 +33,9 @@ export const initEat = {
   /** 评价 */
   evaluation: '',
   /** 菜 */
-  dishes: [initDish],
+  dishes: [initDish()],
   id: "0"
-}
+})
 
 
 Page({

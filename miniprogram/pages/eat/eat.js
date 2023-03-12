@@ -111,8 +111,7 @@ Page({
   onDelete: function (e) {
     console.log("onDelete", e.currentTarget.dataset.id)
     const eat = wx.getStorageSync("eats") || []
-    eat.find(i => i.id == parseInt(e.currentTarget.dataset.id)).delete = true
-    console.log("after Delete", eat[parseInt(e.currentTarget.dataset.id)])
+    eat.find(i => i.id == e.currentTarget.dataset.id).delete = true
 
     wx.setStorageSync('eats', eat)
     this.setData({
@@ -177,7 +176,7 @@ Page({
     let newData = JSON.parse(String(this.data.importData))
     newData = newData.map((item, index) => {
       return {
-        ...initEat,
+        ...initEat(),
         ...item,
         id: String(prevLength + index)
       }
@@ -195,90 +194,3 @@ Page({
     });
   },
 })
-/** 
-[{
-  restaurantName: '何止料理',
-  like: false,
-  rate: 2.5,
-  time: 1675483200000,
-  price: '61',
-  coordinate: '',
-  evaluation: '食欲2',
-  dishes: [{
-    delete: false,
-    name: '玉子烧拉普拉斯',
-    rate: '0',
-    like: false,
-    evaluation: ' 不喜欢（ 可能是黑蒜味接受不了, 里面加了菜也不太喜欢)',
-    price: '',
-    id: "0"
-  }, {
-    delete: false,
-    name: '金枪鱼牛油果拌饭',
-    rate: '3',
-    like: false,
-    evaluation: '不错 好少吃牛油果拌饭 可以的， 分量大.',
-    price: '',
-    id: "1"
-  }],
-}, {
-  restaurantName: '辣可可',
-  like: false,
-  rate: 3,
-  time: 1675656000000,
-  price: '别人请吃饭',
-  coordinate: '深圳湾公司楼下',
-  evaluation: '炒黄牛肉很好吃， 值， 其他的一般。',
-  dishes: [],
-}, {
-  restaurantName: '脆鲜生脆皖鱼火锅',
-  like: true,
-  rate: 3.5,
-  time: 1676455200000,
-  price: '别人请吃饭',
-  coordinate: '深圳湾公司楼下',
-  evaluation: '鱼很好吃， 适合多人吃， 注意吃到后面会腻， 土豆泥好吃， 推介小料不错， 鱼排一般， 价格略高',
-  dishes: [],
-}, {
-  restaurantName: '太食兽泰国菜',
-  like: true,
-  rate: 4,
-  time: 1676714400000,
-  price: '190',
-  coordinate: '后海',
-  evaluation: '好吃， 爽，有点特色，总体很贵，性价比还是相对低。',
-  dishes: [{
-    delete: false,
-    name: '虾饼',
-    rate: '2',
-    like: false,
-    evaluation: '推荐菜，感觉一般吧， 没啥特色但是料足。',
-    price: '',
-    id: "0"
-  }, {
-    delete: false,
-    name: '芒果饭',
-    rate: '3',
-    like: false,
-    evaluation: '好吃，热椰汁，咸甜口糯米饭',
-    price: '',
-    id: "1"
-  }, {
-    delete: false,
-    name: '酸辣虾',
-    rate: '3.5',
-    like: true,
-    evaluation: '推荐！ 不辣很香， 就是略贵,且晚上拉肚子了不知道有没有关系。。。',
-    price: '',
-    id: "2"
-  }, {
-    delete: false,
-    name: '话梅冬瓜饮料',
-    rate: '2.5',
-    like: true,
-    evaluation: '网上有人推荐，感觉一般吧',
-    price: '',
-    id: "3"
-  }]
-}]
-*/

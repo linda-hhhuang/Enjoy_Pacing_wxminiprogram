@@ -23,12 +23,6 @@
 }
 
 .eat-edit-container {
-  /* width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box; */
   height: 100vh;
   overflow: hidden;
 }

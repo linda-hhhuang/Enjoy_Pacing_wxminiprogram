@@ -3,12 +3,12 @@
   <view class="form">
     <view class="main-wrapper">
       <view class="main-form-item">
-        <t-input placeholder="店名(不要太长噢)" align="right" value="{{form.restaurantName}}" bindchange="onRestaurantNameChange" disabled="{{type==='check'}}">
+        <t-input placeholder="店名(不要太长噢)" align="right" value="{{form.restaurantName}}" bindchange="onRestaurantNameChange" disabled="{{disable}}">
           <view class="title" slot="label">店名</view>
         </t-input>
       </view>
       <view class="main-form-item">
-        <t-cell hover note="{{datetime}}" arrow="{{type!=='check'}}" bindtap="showPicker" t-class="pannel-item">
+        <t-cell hover note="{{datetime}}" arrow="{{!disable}}" bindtap="showPicker" t-class="pannel-item">
           <view class="title" slot="title">时间</view>
         </t-cell>
       </view>
@@ -16,34 +16,34 @@
       <view class="main-form-item">
         <view class="main-form-item-content border">
           <view class="title">收藏</view>
-          <t-radio-group value="{{form.like}}" borderless class="like-box" bindchange="onLikeChange" disabled="{{type==='check'}}">
-            <t-radio block="{{false}}" label="是" value="{{true}}" />
-            <t-radio block="{{false}}" label="否" value="{{false}}" />
+          <t-radio-group value="{{form.like}}" borderless class="like-box" bindchange="onLikeChange" disabled="{{disable}}">
+            <t-radio block="{{false}}" label="是" value="{{true}}" disabled="{{disable}}" />
+            <t-radio block="{{false}}" label="否" value="{{false}}" disabled="{{disable}}" />
           </t-radio-group>
         </view>
       </view>
       <view class="main-form-item">
-        <t-input placeholder="位置" align="right" value="{{form.coordinate}}" bindchange="onCoordinateChange" disabled="{{type==='check'}}">
+        <t-input placeholder="位置" align="right" value="{{form.coordinate}}" bindchange="onCoordinateChange" disabled="{{disable}}">
           <view class="title" slot="label">位置</view>
         </t-input>
       </view>
 
       <view class="flex" class="main-form-item">
-        <t-input placeholder="0.00" align="right" value="{{form.price}}" bindchange="onPriceChagnge" disabled="{{type==='check'}}">
+        <t-input placeholder="0.00" align="right" value="{{form.price}}" bindchange="onPriceChagnge" disabled="{{disable}}">
           <view class="title" slot="label">总价</view>
         </t-input>
-        <t-button theme="primary" size="extra-small" bind:tap="onPriceCount" disabled="{{type==='check'}}"> 自动 </t-button>
+        <t-button theme="primary" size="extra-small" bind:tap="onPriceCount" disabled="{{disable}}"> 自动 </t-button>
       </view>
       <view class="main-form-item">
         <view class="main-form-item-content border">
           <view class="title">总分</view>
-          <t-rate class="rate_star" value="{{form.rate}}" allowHalf bind:change="onRateChange" disabled="{{type==='check'}}" />
+          <t-rate class="rate_star" value="{{form.rate}}" allowHalf bind:change="onRateChange" disabled="{{disable}}" />
         </view>
       </view>
       <view class="main-form-item">
         <view class="main-form-item-content border">
           <view class="title">总评</view>
-          <t-textarea placeholder="写写！" disableDefaultPadding="{{true}}" autosize value="{{form.evaluation}}" bind:change="onEvaluationChange" class="evaluation" disabled="{{type==='check'}}" />
+          <t-textarea placeholder="写写！" disableDefaultPadding="{{true}}" autosize value="{{form.evaluation}}" bind:change="onEvaluationChange" class="evaluation" disabled="{{disable}}" />
         </view>
       </view>
     </view>
@@ -69,34 +69,34 @@
           <!-- 内容 -->
           <view class="dish-form-item-wrapper">
             <view class="dish-form-item">
-              <t-input placeholder="菜名(不要太长噢)" align="right" value="{{dish.name}}" bindchange="onDishNameChange" data-id="{{dish.id}}" disabled="{{type==='check'}}">
+              <t-input placeholder="菜名(不要太长噢)" align="right" value="{{dish.name}}" bindchange="onDishNameChange" data-id="{{dish.id}}" disabled="{{disable}}">
                 <view class="title" slot="label">菜名</view>
               </t-input>
             </view>
             <view class="dish-form-item">
               <view class="dish-form-item-content border">
                 <view class="title">收藏</view>
-                <t-radio-group value="{{dish.like}}" borderless class="like-box" bindchange="onDishLikeChange" data-id="{{dish.id}}" disabled="{{type==='check'}}">
-                  <t-radio block="{{false}}" label="是" value="{{true}}" />
-                  <t-radio block="{{false}}" label="否" value="{{false}}" />
+                <t-radio-group value="{{dish.like}}" borderless class="like-box" bindchange="onDishLikeChange" data-id="{{dish.id}}" disabled="{{disable}}">
+                  <t-radio block="{{false}}" label="是" value="{{true}}" disabled="{{disable}}" />
+                  <t-radio block="{{false}}" label="否" value="{{false}}" disabled="{{disable}}" />
                 </t-radio-group>
               </view>
             </view>
             <view class="flex" class="dish-form-item">
-              <t-input placeholder="0.00" align="right" value="{{dish.price}}" bindchange="onDishPriceChagnge" data-id="{{dish.id}}" disabled="{{type==='check'}}">
+              <t-input placeholder="0.00" align="right" value="{{dish.price}}" bindchange="onDishPriceChagnge" data-id="{{dish.id}}" disabled="{{disable}}">
                 <view class="title" slot="label">价格</view>
               </t-input>
             </view>
             <view class="dish-form-item">
               <view class="dish-form-item-content border">
                 <view class="title">分数</view>
-                <t-rate value="{{dish.rate}}" allowHalf bind:change="onDishRateChange" data-id="{{dish.id}}" disabled="{{type==='check'}}" />
+                <t-rate value="{{dish.rate}}" allowHalf bind:change="onDishRateChange" data-id="{{dish.id}}" disabled="{{disable}}" />
               </view>
             </view>
             <view class="dish-form-item">
               <view class="dish-form-item-content border">
                 <view class="title">评分</view>
-                <t-textarea placeholder="写写！" disableDefaultPadding="{{true}}" autosize value="{{dish.evaluation}}" bind:change="onDishEvaluationChange" class="evaluation" data-id="{{dish.id}}" disabled="{{type==='check'}}" />
+                <t-textarea placeholder="写写！" disableDefaultPadding="{{true}}" autosize value="{{dish.evaluation}}" bind:change="onDishEvaluationChange" class="evaluation" data-id="{{dish.id}}" disabled="{{disable}}" />
               </view>
             </view>
           </view>
@@ -108,7 +108,7 @@
   </view>
 
   <view class="footer-btn-warpper">
-    <block wx:if="{{type==='check'}}">
+    <block wx:if="{{disable}}">
       <t-button theme="light" size="large" class="check-footer-btn" bind:tap="onCancel">看完啦</t-button>
     </block>
     <block wx:else>
